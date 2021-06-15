@@ -82,7 +82,7 @@ func main() {
 					haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
 					imgBoss = "remaining.png"
 					imgDifficulty = "gameProblem.png"
-					yDifficulty = 310
+					yDifficulty = 200
 					yBoss = 200
 					choeseBossSeq = settingConfig.RNumber
 				}
