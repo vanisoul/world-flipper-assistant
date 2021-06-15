@@ -231,7 +231,7 @@ func choeseDifficulty(seq int) {
 	if seq < 6 {
 		leftMouseClick(x, y)
 	} else {
-		ys := y_tmp + 310 + 4*110
+		ys := y_tmp + 310 + 2*110
 		ye := y_tmp + 310 + 1*110
 		robotgo.MoveMouse(x, ys)
 		robotgo.MouseToggle(`down`, `left`)
@@ -239,7 +239,7 @@ func choeseDifficulty(seq int) {
 		robotgo.MoveMouse(x, ye)
 		robotgo.Sleep(1)
 		robotgo.MouseToggle(`up`, `left`)
-		choeseBoss(seq - 3)
+		choeseDifficulty(seq - 1)
 		robotgo.Sleep(1)
 	}
 }
