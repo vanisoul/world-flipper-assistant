@@ -56,6 +56,12 @@ func main() {
 			} else if settingConfig.Type == "freeActivity" {
 				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
 				imgBoss = "remaining.png"
+				imgDifficulty = "isNotFound"
+				yDifficulty = 310
+				yBoss = 200
+			} else if settingConfig.Type == "repalay" {
+				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
+				imgBoss = "remaining.png"
 				imgDifficulty = "updateList.png"
 				yDifficulty = 310
 				yBoss = 200
@@ -126,6 +132,13 @@ func main() {
 		//有錯誤問題
 		haveOneImgsLeft(1, 0.01, false, getSystemImg("exitHalfway.png"))
 		haveOneImgsLeft(1, 0.01, false, getSystemImg("errorOK.png"))
+
+		//有挑戰點挑戰
+		haveOneImgsLeft(1, 0.01, false, getSystemImg("goGame.png"))
+
+		//戰鬥失敗
+		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOver.png"))
+		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOverOK.png"))
 
 		robotgo.Sleep(3)
 	}
