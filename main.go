@@ -81,7 +81,7 @@ func main() {
 				} else if now_type == "repalay" {
 					haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
 					imgBoss = "remaining.png"
-					imgDifficulty = "updateList.png"
+					imgDifficulty = "gameProblem.png"
 					yDifficulty = 310
 					yBoss = 200
 					choeseBossSeq = settingConfig.RNumber
