@@ -23,11 +23,14 @@ func main() {
 	tmpCMode := 0               //共鬥的模式
 	tmpStaminaRecoveryTime := 0 //Auto時回體時間
 
-	choeseBossSeq := 0 //這次選擇的關卡
+	tmpAuto := "repalay" //紀錄auto狀態 如果是auto模式才有用到
+	secAuto := 0         //紀錄回體時間
+	choseAuto := false   //紀錄這次有沒有被改變狀態
+	choeseBossSeq := 0   //這次選擇的關卡
 	for {
 		//如果config有變動 需要重新回到主頁
 		settingConfig, _ := LoadSettingConfig()
-		if tmpRDifficulty != settingConfig.RDifficulty || tmpRNumber != settingConfig.RNumber || tmpType != settingConfig.Type || tmpCMode != settingConfig.CMode || tmpStaminaRecoveryTime != settingConfig.StaminaRecoveryTime || tmpCNumber != settingConfig.CNumber {
+		if tmpRDifficulty != settingConfig.RDifficulty || tmpRNumber != settingConfig.RNumber || tmpType != settingConfig.Type || tmpCMode != settingConfig.CMode || tmpStaminaRecoveryTime != settingConfig.StaminaRecoveryTime || tmpCNumber != settingConfig.CNumber || choseAuto {
 			tmpRDifficulty = settingConfig.RDifficulty
 			tmpRNumber = settingConfig.RNumber
 			tmpType = settingConfig.Type
@@ -40,6 +43,7 @@ func main() {
 					haveOneImgsLeft(1, 0.05, true, getSystemImg("disband.png"))
 				})
 			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"))
+			choseAuto = false
 		}
 
 		//開啟遊戲
@@ -52,20 +56,28 @@ func main() {
 
 		//進入bose戰鬥or活動戰鬥
 		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("mainMission.png")}, func(x, y int) {
-			if settingConfig.Type == "freeBoss" {
+
+			now_type := ""
+			if settingConfig.Type == "Auto" {
+				now_type = tmpAuto
+			} else {
+				now_type = settingConfig.Type
+			}
+
+			if now_type == "freeBoss" {
 				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinBoss.png"))
 				imgBoss = "isNotFound"
 				imgDifficulty = "isNotFound"
 				yDifficulty = 0
 				yBoss = 0
-			} else if settingConfig.Type == "freeActivity" {
+			} else if now_type == "freeActivity" {
 				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
 				imgBoss = "remaining.png"
 				imgDifficulty = "isNotFound"
 				yDifficulty = 310
 				yBoss = 200
 				choeseBossSeq = settingConfig.CNumber
-			} else if settingConfig.Type == "repalay" {
+			} else if now_type == "repalay" {
 				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
 				imgBoss = "remaining.png"
 				imgDifficulty = "updateList.png"
@@ -149,6 +161,25 @@ func main() {
 		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOverOK.png"))
 		//LvUp
 		//rePlay
+
+		//auto相關判斷 如果是repalay狀態 則不計時
+		//如果不是 就判斷大於等待時間後 重新去刷體力關卡
+		secAuto = secAuto + 1
+		if secAuto > tmpStaminaRecoveryTime {
+			tmpAuto = "repalay"
+			choseAuto = true
+			secAuto = 0
+		} else if tmpAuto == "repalay" {
+			secAuto = 0
+		}
+		//如果體力不夠改變暫時的動作
+		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("lackOfEnergy.png")}, func(x, y int) {
+			haveOneImgsLeft(5, 0.05, false, getSystemImg("cancel.png"))
+			tmpAuto = settingConfig.Type
+			choseAuto = true
+			secAuto = 0
+		})
+
 		robotgo.Sleep(3)
 	}
 }
