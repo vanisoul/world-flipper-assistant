@@ -4,5 +4,6 @@
     "cNumber": 1,
     "rNumber": 1,
     "rDifficulty":1,
+    "permanentPhysicalExertion":true,
     "staminaRecoveryTime":1000
 }
