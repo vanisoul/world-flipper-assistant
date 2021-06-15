@@ -162,8 +162,9 @@ func main() {
 		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOver.png"))
 		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOverOK.png"))
 		//LvUp
+		haveOneImgsLeft(1, 0.01, false, getSystemImg("LvUp.png"))
 		//rePlay
-
+		haveOneImgsLeft(1, 0.01, false, getSystemImg("rePlay.png"))
 		//auto相關判斷 如果是repalay狀態 則不計時
 		//如果不是 就判斷大於等待時間後 重新去刷體力關卡
 		secAuto = secAuto + 1
