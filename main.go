@@ -158,8 +158,10 @@ func main() {
 						})
 					}
 				}, func() {
-					leftMouseClick(x, y)
-					leftMouseClick(x+50, y)
+					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
+						leftMouseClick(x, y)
+						leftMouseClick(x+80, y)
+					})
 				})
 			},
 			func(x, y int) {
