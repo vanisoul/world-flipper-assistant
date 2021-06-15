@@ -16,12 +16,13 @@ func main() {
 	//初始化ID
 	infoID()
 
-	tmpRDifficulty := 0         //重復打的難度
-	tmpRNumber := 0             //重復打的關卡
-	tmpCNumber := 0             //共鬥打的關卡
-	tmpType := ""               //哪一種模式
-	tmpCMode := 0               //共鬥的模式
-	tmpStaminaRecoveryTime := 0 //Auto時回體時間
+	tmpRDifficulty := 0                   //重復打的難度
+	tmpRNumber := 0                       //重復打的關卡
+	tmpCNumber := 0                       //共鬥打的關卡
+	tmpType := ""                         //哪一種模式
+	tmpCMode := 0                         //共鬥的模式
+	tmpStaminaRecoveryTime := 0           //Auto時回體時間
+	tmpPermanentPhysicalExertion := false //是否啟動常駐會消耗體力 自動判別有體力就去刷關
 
 	tmpAuto := "repalay" //紀錄auto狀態 如果是auto模式才有用到
 	secAuto := 0         //紀錄回體時間
@@ -30,13 +31,14 @@ func main() {
 	for {
 		//如果config有變動 需要重新回到主頁
 		settingConfig, _ := LoadSettingConfig()
-		if tmpRDifficulty != settingConfig.RDifficulty || tmpRNumber != settingConfig.RNumber || tmpType != settingConfig.Type || tmpCMode != settingConfig.CMode || tmpStaminaRecoveryTime != settingConfig.StaminaRecoveryTime || tmpCNumber != settingConfig.CNumber || choseAuto {
+		if tmpRDifficulty != settingConfig.RDifficulty || tmpRNumber != settingConfig.RNumber || tmpType != settingConfig.Type || tmpCMode != settingConfig.CMode || tmpStaminaRecoveryTime != settingConfig.StaminaRecoveryTime || tmpCNumber != settingConfig.CNumber || choseAuto || tmpPermanentPhysicalExertion != settingConfig.PermanentPhysicalExertion {
 			tmpRDifficulty = settingConfig.RDifficulty
 			tmpRNumber = settingConfig.RNumber
 			tmpType = settingConfig.Type
 			tmpCMode = settingConfig.CMode
 			tmpCNumber = settingConfig.CNumber
 			tmpStaminaRecoveryTime = settingConfig.StaminaRecoveryTime
+			tmpPermanentPhysicalExertion = settingConfig.PermanentPhysicalExertion
 			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("startRaising.png")},
 				func(x, y int) {
 					haveOneImgsLeft(1, 0.05, true, getSystemImg("return.png"))
@@ -58,7 +60,7 @@ func main() {
 		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("mainMission.png")}, func(x, y int) {
 
 			now_type := ""
-			if settingConfig.Type == "Auto" {
+			if settingConfig.PermanentPhysicalExertion {
 				now_type = tmpAuto
 			} else {
 				now_type = settingConfig.Type

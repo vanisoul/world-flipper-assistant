@@ -19,12 +19,13 @@ func LoadSettingConfig() (config SettingConfig, err error) {
 }
 
 type SettingConfig struct {
-	Type                string `mapstructure:"type"`
-	CMode               int    `mapstructure:"cMode"`
-	CNumber             int    `mapstructure:"cNumber"`
-	RNumber             int    `mapstructure:"rNumber"`
-	RDifficulty         int    `mapstructure:"rDifficulty"`
-	StaminaRecoveryTime int    `mapstructure:"staminaRecoveryTime"`
+	Type                      string `mapstructure:"type"`
+	CMode                     int    `mapstructure:"cMode"`
+	CNumber                   int    `mapstructure:"cNumber"`
+	RNumber                   int    `mapstructure:"rNumber"`
+	RDifficulty               int    `mapstructure:"rDifficulty"`
+	StaminaRecoveryTime       int    `mapstructure:"staminaRecoveryTime"`
+	PermanentPhysicalExertion bool   `mapstructure:"permanentPhysicalExertion"`
 }
 
 /*
