@@ -39,12 +39,21 @@ func main() {
 			tmpCNumber = settingConfig.CNumber
 			tmpStaminaRecoveryTime = settingConfig.StaminaRecoveryTime
 			tmpPermanentPhysicalExertion = settingConfig.PermanentPhysicalExertion
-			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("startRaising.png")},
+			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("startRaising.png"), getSystemImg("goGame.png"), getSystemImg("stop.png")},
 				func(x, y int) {
-					haveOneImgsLeft(1, 0.05, true, getSystemImg("return.png"))
-					haveOneImgsLeft(1, 0.05, true, getSystemImg("disband.png"))
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("return.png"))
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("disband.png"))
+				},
+				func(x, y int) {
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("return.png"))
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("disband.png"))
+				},
+				func(x, y int) {
+					leftMouseClick(x, y)
+					haveOneImgsLeft(5, 0.01, false, getSystemImg("exit.png"))
+					haveOneImgsLeft(5, 0.01, false, getSystemImg("exitYes.png"))
 				})
-			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"))
+			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
 			choseAuto = false
 		}
 
