@@ -49,120 +49,137 @@ func main() {
 		}
 
 		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("gameLogo.png")}, func(x, y int) {
-			leftMouseClick(x, y)
-		})
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("joinMain.png")}, func(x, y int) {
-			leftMouseClick(x, y)
-		})
-
-		//進入bose戰鬥or活動戰鬥
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("mainMission.png")}, func(x, y int) {
-
-			now_type := ""
-			if settingConfig.PermanentPhysicalExertion {
-				now_type = tmpAuto
-			} else {
-				now_type = settingConfig.Type
-			}
-
-			if now_type == "freeBoss" {
-				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinBoss.png"))
-				imgBoss = "isNotFound"
-				imgDifficulty = "isNotFound"
-				yDifficulty = 0
-				yBoss = 0
-			} else if now_type == "freeActivity" {
-				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
-				imgBoss = "remaining.png"
-				imgDifficulty = "isNotFound"
-				yDifficulty = 310
-				yBoss = 200
-				choeseBossSeq = settingConfig.CNumber
-			} else if now_type == "repalay" {
-				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
-				imgBoss = "remaining.png"
-				imgDifficulty = "updateList.png"
-				yDifficulty = 310
-				yBoss = 200
-				choeseBossSeq = settingConfig.RNumber
-			}
-		})
-
-		//處理選擇boss關卡
-		haveOneImgsExecFunc(1, 0.01, false, []string{getSystemImg(imgBoss)}, func(x, y int) { choeseBoss(choeseBossSeq) })
-
-		//處理選擇難度
-		haveOneImgsExecFunc(1, 0.01, false, []string{getSystemImg(imgDifficulty)}, func(x, y int) { choeseDifficulty(settingConfig.RDifficulty) })
-
-		//使用強化點數
-		haveOneImgsLeft(1, 0.05, true, getSystemImg("YES.png"))
-
-		//閒置
-		haveOneImgsLeft(1, 0.05, true, getSystemImg("OK.png"))
-
-		//如果有需要領取獎勵 關閉活動通知
-		haveOneImgsLeft(1, 0.05, true, getSystemImg("dayGift.png"))
-		haveOneImgsLeft(1, 0.05, true, getSystemImg("dayClose.png"))
-
-		//進入free到房間
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("updateList.png")}, func(x, y int) {
-			haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func() {
-				haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func(x, y int) {
-					leftMouseClick(x-100, y)
-				})
-			}, func() {
+		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png")},
+			func(x, y int) {
 				leftMouseClick(x, y)
-			})
-		})
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
 
-		//尚未準備 開始執行準備
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("ready.png")}, func(x, y int) {
-			leftMouseClick(x, y)
-		})
-
-		//打完的下一步加離開房間
-		haveOneImgsLeft(1, 0.05, false, getSystemImg("next1.png"))
-		haveOneImgsLeft(1, 0.05, false, getSystemImg("next2.png"))
-		haveOneImgsLeft(1, 0.05, false, getSystemImg("next3.png"))
-		haveOneImgsLeft(1, 0.05, false, getSystemImg("next4.png"))
-		haveOneImgsLeft(1, 0.05, false, getSystemImg("exitRoom.png"))
-
-		// 如果以準備 確認人數有沒有滿 沒滿要使用何種招募方式 如果滿就開始
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png")}, func(x, y int) {
-			//如果是招募中 就看招募方式  以滿就直接開始
-			haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png"), getSystemImg("recruiting.png")}, func() {
-				if settingConfig.CMode == 1 {
-					//直接開始
-					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-						leftMouseClick(x, y)
-						leftMouseClick(x+80, y)
-					})
-				} else if settingConfig.CMode == 2 {
-					//開放等人滿開始
-					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-						leftMouseClick(x, y)
-						leftMouseClick(x+190, y)
-					})
+				now_type := ""
+				if settingConfig.PermanentPhysicalExertion {
+					now_type = tmpAuto
+				} else {
+					now_type = settingConfig.Type
 				}
-			}, func() {
+
+				if now_type == "freeBoss" {
+					haveOneImgsLeft(10, 0.05, true, getSystemImg("joinBoss.png"))
+					imgBoss = "isNotFound"
+					imgDifficulty = "isNotFound"
+					yDifficulty = 0
+					yBoss = 0
+				} else if now_type == "freeActivity" {
+					haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
+					imgBoss = "remaining.png"
+					imgDifficulty = "isNotFound"
+					yDifficulty = 310
+					yBoss = 200
+					choeseBossSeq = settingConfig.CNumber
+				} else if now_type == "repalay" {
+					haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
+					imgBoss = "remaining.png"
+					imgDifficulty = "updateList.png"
+					yDifficulty = 310
+					yBoss = 200
+					choeseBossSeq = settingConfig.RNumber
+				}
+			},
+			func(x, y int) {
+				choeseBoss(choeseBossSeq)
+			},
+			func(x, y int) {
+				choeseDifficulty(settingConfig.RDifficulty)
+			},
+			func(x, y int) {
 				leftMouseClick(x, y)
-				leftMouseClick(x+50, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func() {
+					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func(x, y int) {
+						leftMouseClick(x-100, y)
+					})
+				}, func() {
+					leftMouseClick(x, y)
+				})
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				//如果是招募中 就看招募方式  以滿就直接開始
+				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png"), getSystemImg("recruiting.png")}, func() {
+					if settingConfig.CMode == 1 {
+						//直接開始
+						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
+							leftMouseClick(x, y)
+							leftMouseClick(x+80, y)
+						})
+					} else if settingConfig.CMode == 2 {
+						//開放等人滿開始
+						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
+							leftMouseClick(x, y)
+							leftMouseClick(x+190, y)
+						})
+					}
+				}, func() {
+					leftMouseClick(x, y)
+					leftMouseClick(x+50, y)
+				})
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				haveOneImgsLeft(5, 0.05, false, getSystemImg("cancel.png"))
+				tmpAuto = settingConfig.Type
+				choseAuto = true
+				secAuto = 0
 			})
-		})
-
-		//有錯誤問題
-		haveOneImgsLeft(1, 0.01, false, getSystemImg("exitHalfway.png"))
-		haveOneImgsLeft(1, 0.01, false, getSystemImg("errorOK.png"))
-
-		//有挑戰點挑戰
-		haveOneImgsLeft(1, 0.01, false, getSystemImg("goGame.png"))
-
-		//戰鬥失敗
-		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOver.png"))
-		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOverOK.png"))
-		//LvUp
-		//rePlay
 
 		//auto相關判斷 如果是repalay狀態 則不計時
 		//如果不是 就判斷大於等待時間後 重新去刷體力關卡
@@ -174,15 +191,7 @@ func main() {
 		} else if tmpAuto == "repalay" {
 			secAuto = 0
 		}
-		//如果體力不夠改變暫時的動作
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("lackOfEnergy.png")}, func(x, y int) {
-			haveOneImgsLeft(5, 0.05, false, getSystemImg("cancel.png"))
-			tmpAuto = settingConfig.Type
-			choseAuto = true
-			secAuto = 0
-		})
 
-		robotgo.Sleep(3)
 	}
 }
 
