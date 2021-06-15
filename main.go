@@ -15,19 +15,24 @@ func main() {
 	infoScreen(-40, -40, 600, 1050)
 	//初始化ID
 	infoID()
-	tmpDifficulty := 0
-	tmpNumber := 0
-	tmpType := ""
-	tmpMode := 0
-	tmpStaminaRecoveryTime := 0
+
+	tmpRDifficulty := 0         //重復打的難度
+	tmpRNumber := 0             //重復打的關卡
+	tmpCNumber := 0             //共鬥打的關卡
+	tmpType := ""               //哪一種模式
+	tmpCMode := 0               //共鬥的模式
+	tmpStaminaRecoveryTime := 0 //Auto時回體時間
+
+	choeseBossSeq := 0 //這次選擇的關卡
 	for {
 		//如果config有變動 需要重新回到主頁
 		settingConfig, _ := LoadSettingConfig()
-		if tmpDifficulty != settingConfig.Difficulty || tmpNumber != settingConfig.Number || tmpType != settingConfig.Type || tmpMode != settingConfig.Mode || tmpStaminaRecoveryTime != settingConfig.StaminaRecoveryTime {
-			tmpDifficulty = settingConfig.Difficulty
-			tmpNumber = settingConfig.Number
+		if tmpRDifficulty != settingConfig.RDifficulty || tmpRNumber != settingConfig.RNumber || tmpType != settingConfig.Type || tmpCMode != settingConfig.CMode || tmpStaminaRecoveryTime != settingConfig.StaminaRecoveryTime || tmpCNumber != settingConfig.CNumber {
+			tmpRDifficulty = settingConfig.RDifficulty
+			tmpRNumber = settingConfig.RNumber
 			tmpType = settingConfig.Type
-			tmpMode = settingConfig.Mode
+			tmpCMode = settingConfig.CMode
+			tmpCNumber = settingConfig.CNumber
 			tmpStaminaRecoveryTime = settingConfig.StaminaRecoveryTime
 			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("startRaising.png")},
 				func(x, y int) {
@@ -59,20 +64,22 @@ func main() {
 				imgDifficulty = "isNotFound"
 				yDifficulty = 310
 				yBoss = 200
+				choeseBossSeq = settingConfig.CNumber
 			} else if settingConfig.Type == "repalay" {
 				haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
 				imgBoss = "remaining.png"
 				imgDifficulty = "updateList.png"
 				yDifficulty = 310
 				yBoss = 200
+				choeseBossSeq = settingConfig.RNumber
 			}
 		})
 
 		//處理選擇boss關卡
-		haveOneImgsExecFunc(1, 0.01, false, []string{getSystemImg(imgBoss)}, func(x, y int) { choeseBoss(settingConfig.Number) })
+		haveOneImgsExecFunc(1, 0.01, false, []string{getSystemImg(imgBoss)}, func(x, y int) { choeseBoss(choeseBossSeq) })
 
 		//處理選擇難度
-		haveOneImgsExecFunc(1, 0.01, false, []string{getSystemImg(imgDifficulty)}, func(x, y int) { choeseDifficulty(settingConfig.Difficulty) })
+		haveOneImgsExecFunc(1, 0.01, false, []string{getSystemImg(imgDifficulty)}, func(x, y int) { choeseDifficulty(settingConfig.RDifficulty) })
 
 		//使用強化點數
 		haveOneImgsLeft(1, 0.05, true, getSystemImg("YES.png"))
@@ -104,19 +111,20 @@ func main() {
 		haveOneImgsLeft(1, 0.05, false, getSystemImg("next1.png"))
 		haveOneImgsLeft(1, 0.05, false, getSystemImg("next2.png"))
 		haveOneImgsLeft(1, 0.05, false, getSystemImg("next3.png"))
+		haveOneImgsLeft(1, 0.05, false, getSystemImg("next4.png"))
 		haveOneImgsLeft(1, 0.05, false, getSystemImg("exitRoom.png"))
 
 		// 如果以準備 確認人數有沒有滿 沒滿要使用何種招募方式 如果滿就開始
 		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png")}, func(x, y int) {
 			//如果是招募中 就看招募方式  以滿就直接開始
 			haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png"), getSystemImg("recruiting.png")}, func() {
-				if settingConfig.Mode == 1 {
+				if settingConfig.CMode == 1 {
 					//直接開始
 					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
 						leftMouseClick(x, y)
 						leftMouseClick(x+80, y)
 					})
-				} else if settingConfig.Mode == 2 {
+				} else if settingConfig.CMode == 2 {
 					//開放等人滿開始
 					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
 						leftMouseClick(x, y)
@@ -139,7 +147,8 @@ func main() {
 		//戰鬥失敗
 		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOver.png"))
 		haveOneImgsLeft(1, 0.01, false, getSystemImg("gmaeOverOK.png"))
-
+		//LvUp
+		//rePlay
 		robotgo.Sleep(3)
 	}
 }

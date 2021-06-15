@@ -1,7 +1,8 @@
 {
     "type": "freeBoss",
-    "mode": 1,
-    "number": 1,
-    "difficulty":1,
+    "cMode": 1,
+    "cNumber": 1,
+    "rNumber": 1,
+    "rDifficulty":1,
     "staminaRecoveryTime":1000
 }
