@@ -10,6 +10,7 @@ var imgBoss = "remaining.pngOrstroke.png"
 var imgDifficulty = "updateList.pngOritemExchange.png"
 
 func main() {
+
 	//初始化設定 未來要判斷視窗位置
 	infoScreen(-40, -40, 600, 1050)
 	//初始化ID
@@ -78,14 +79,26 @@ func main() {
 		haveOneImgsLeft(1, 0.05, true, getSystemImg("dayClose.png"))
 
 		//進入free到房間
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func(x, y int) {
-			leftMouseClick(x-100, y)
+		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("updateList.png")}, func(x, y int) {
+			haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func() {
+				haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func(x, y int) {
+					leftMouseClick(x-100, y)
+				})
+			}, func() {
+				leftMouseClick(x, y)
+			})
 		})
 
 		//尚未準備 開始執行準備
 		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("ready.png")}, func(x, y int) {
 			leftMouseClick(x, y)
 		})
+
+		//打完的下一步加離開房間
+		haveOneImgsLeft(1, 0.05, false, getSystemImg("next1.png"))
+		haveOneImgsLeft(1, 0.05, false, getSystemImg("next2.png"))
+		haveOneImgsLeft(1, 0.05, false, getSystemImg("next3.png"))
+		haveOneImgsLeft(1, 0.05, false, getSystemImg("exitRoom.png"))
 
 		// 如果以準備 確認人數有沒有滿 沒滿要使用何種招募方式 如果滿就開始
 		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png")}, func(x, y int) {
@@ -95,13 +108,13 @@ func main() {
 					//直接開始
 					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
 						leftMouseClick(x, y)
-						leftMouseClick(x+50, y)
+						leftMouseClick(x+80, y)
 					})
 				} else if settingConfig.Mode == 2 {
 					//開放等人滿開始
 					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
 						leftMouseClick(x, y)
-						leftMouseClick(x+150, y)
+						leftMouseClick(x+190, y)
 					})
 				}
 			}, func() {
