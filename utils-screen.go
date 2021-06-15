@@ -62,10 +62,12 @@ func haveOneImgsExecFunc(frequency int, matchNumber float64, rigorous bool, imgF
 //rigorous : 是否需要持續1秒鐘以上圖片存在才算匹配成功 : 秒數可由rigorousSec修改,
 //imgFullPaths : 傳入圖片相對全路徑 (多張),
 //funcs : 可能被執行的方法
-func haveAllImgsExecFunc(frequency int, matchNumber float64, rigorous bool, imgFullPaths []string, funcs func()) {
+func haveAllImgsExecFunc(frequency int, matchNumber float64, rigorous bool, imgFullPaths []string, funcY func(), funcN func()) {
 	findSucc := findAllImages(frequency, matchNumber, rigorous, imgFullPaths...)
 	if findSucc {
-		funcs()
+		funcY()
+	} else {
+		funcN()
 	}
 }
 
