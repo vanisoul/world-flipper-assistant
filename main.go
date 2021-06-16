@@ -15,7 +15,6 @@ func main() {
 	infoScreen(-40, -40, 600, 1050)
 	//初始化ID
 	infoID()
-	settingConfiginit, _ := LoadSettingConfig()
 	tmpRDifficulty := 0                   //重復打的難度
 	tmpRNumber := 0                       //重復打的關卡
 	tmpCNumber := 0                       //共鬥打的關卡
@@ -23,9 +22,9 @@ func main() {
 	tmpCMode := 0                         //共鬥的模式
 	tmpPermanentPhysicalExertion := false //是否啟動常駐會消耗體力 自動判別有體力就去刷關
 
-	tmpAuto := settingConfiginit.Type //紀錄auto狀態 如果是auto模式才有用到
-	choseAuto := false                //紀錄這次有沒有被改變狀態
-	choeseBossSeq := 0                //這次選擇的關卡
+	tmpAuto := ""      //紀錄auto狀態 如果是auto模式才有用到
+	choseAuto := false //紀錄這次有沒有被改變狀態
+	choeseBossSeq := 0 //這次選擇的關卡
 	for {
 		//如果config有變動 需要重新回到主頁
 		settingConfig, _ := LoadSettingConfig()
@@ -54,6 +53,10 @@ func main() {
 					haveOneImgsLeft(5, 0.01, false, getSystemImg("exitYes.png"))
 				})
 			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
+			//如果不等於重復關卡 就可以設定目前狀態 因為重復關卡可能是因為體力滿了而執行的AUTO
+			if tmpAuto != "repalay" {
+				tmpAuto = settingConfig.Type
+			}
 			choseAuto = false
 		}
 
