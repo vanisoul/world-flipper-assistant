@@ -36,7 +36,11 @@ func main() {
 			tmpCMode = settingConfig.CMode
 			tmpCNumber = settingConfig.CNumber
 			tmpPermanentPhysicalExertion = settingConfig.PermanentPhysicalExertion
-			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("startRaising.png"), getSystemImg("goGame.png"), getSystemImg("stop.png")},
+			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("ready.png"), getSystemImg("readyOK.png"), getSystemImg("goGame.png"), getSystemImg("stop.png")},
+				func(x, y int) {
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("return.png"))
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("disband.png"))
+				},
 				func(x, y int) {
 					haveOneImgsLeft(3, 0.05, true, getSystemImg("return.png"))
 					haveOneImgsLeft(3, 0.05, true, getSystemImg("disband.png"))
