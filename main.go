@@ -15,29 +15,26 @@ func main() {
 	infoScreen(-40, -40, 600, 1050)
 	//初始化ID
 	infoID()
-
+	settingConfiginit, _ := LoadSettingConfig()
 	tmpRDifficulty := 0                   //重復打的難度
 	tmpRNumber := 0                       //重復打的關卡
 	tmpCNumber := 0                       //共鬥打的關卡
 	tmpType := ""                         //哪一種模式
 	tmpCMode := 0                         //共鬥的模式
-	tmpStaminaRecoveryTime := 0           //Auto時回體時間
 	tmpPermanentPhysicalExertion := false //是否啟動常駐會消耗體力 自動判別有體力就去刷關
 
-	tmpAuto := "repalay" //紀錄auto狀態 如果是auto模式才有用到
-	secAuto := 0         //紀錄回體時間
-	choseAuto := false   //紀錄這次有沒有被改變狀態
-	choeseBossSeq := 0   //這次選擇的關卡
+	tmpAuto := settingConfiginit.Type //紀錄auto狀態 如果是auto模式才有用到
+	choseAuto := false                //紀錄這次有沒有被改變狀態
+	choeseBossSeq := 0                //這次選擇的關卡
 	for {
 		//如果config有變動 需要重新回到主頁
 		settingConfig, _ := LoadSettingConfig()
-		if tmpRDifficulty != settingConfig.RDifficulty || tmpRNumber != settingConfig.RNumber || tmpType != settingConfig.Type || tmpCMode != settingConfig.CMode || tmpStaminaRecoveryTime != settingConfig.StaminaRecoveryTime || tmpCNumber != settingConfig.CNumber || choseAuto || tmpPermanentPhysicalExertion != settingConfig.PermanentPhysicalExertion {
+		if tmpRDifficulty != settingConfig.RDifficulty || tmpRNumber != settingConfig.RNumber || tmpType != settingConfig.Type || tmpCMode != settingConfig.CMode || tmpCNumber != settingConfig.CNumber || choseAuto || tmpPermanentPhysicalExertion != settingConfig.PermanentPhysicalExertion {
 			tmpRDifficulty = settingConfig.RDifficulty
 			tmpRNumber = settingConfig.RNumber
 			tmpType = settingConfig.Type
 			tmpCMode = settingConfig.CMode
 			tmpCNumber = settingConfig.CNumber
-			tmpStaminaRecoveryTime = settingConfig.StaminaRecoveryTime
 			tmpPermanentPhysicalExertion = settingConfig.PermanentPhysicalExertion
 			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("startRaising.png"), getSystemImg("goGame.png"), getSystemImg("stop.png")},
 				func(x, y int) {
@@ -58,7 +55,11 @@ func main() {
 		}
 
 		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png")},
+		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("fullOfEnergy.png"), getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png")},
+			func(x, y int) {
+				tmpAuto = "repalay"
+				choseAuto = true
+			},
 			func(x, y int) {
 				leftMouseClick(x, y)
 			},
@@ -189,7 +190,6 @@ func main() {
 				haveOneImgsLeft(5, 0.05, false, getSystemImg("cancel.png"))
 				tmpAuto = settingConfig.Type
 				choseAuto = true
-				secAuto = 0
 			},
 			func(x, y int) {
 				leftMouseClick(x, y)
@@ -203,18 +203,6 @@ func main() {
 			func(x, y int) {
 				leftMouseClick(x, y)
 			})
-
-		//auto相關判斷 如果是repalay狀態 則不計時
-		//如果不是 就判斷大於等待時間後 重新去刷體力關卡
-		secAuto = secAuto + 1
-		if secAuto > tmpStaminaRecoveryTime {
-			tmpAuto = "repalay"
-			choseAuto = true
-			secAuto = 0
-		} else if tmpAuto == "repalay" {
-			secAuto = 0
-		}
-
 	}
 }
 
