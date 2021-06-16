@@ -118,9 +118,9 @@ func main() {
 				leftMouseClick(x, y)
 			},
 			func(x, y int) {
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func() {
-					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("freeRoom.png")}, func(x, y int) {
-						leftMouseClick(x-100, y)
+				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("toghterGo.png")}, func() {
+					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("toghterGo.png")}, func(x, y int) {
+						leftMouseClick(x, y)
 					})
 				}, func() {
 					leftMouseClick(x, y)
