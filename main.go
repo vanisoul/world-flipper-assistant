@@ -58,7 +58,7 @@ func main() {
 		}
 
 		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png")},
+		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png")},
 			func(x, y int) {
 				leftMouseClick(x, y)
 			},
@@ -190,6 +190,18 @@ func main() {
 				tmpAuto = settingConfig.Type
 				choseAuto = true
 				secAuto = 0
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
 			})
 
 		//auto相關判斷 如果是repalay狀態 則不計時
