@@ -22,9 +22,10 @@ func main() {
 	tmpCMode := 0                         //共鬥的模式
 	tmpPermanentPhysicalExertion := false //是否啟動常駐會消耗體力 自動判別有體力就去刷關
 
-	tmpAuto := ""      //紀錄auto狀態 如果是auto模式才有用到
-	choseAuto := false //紀錄這次有沒有被改變狀態
-	choeseBossSeq := 0 //這次選擇的關卡
+	tmpFreeRoom := "isNotFound" //判斷免費房間的標的圖片
+	tmpAuto := ""               //紀錄auto狀態 如果是auto模式才有用到
+	choseAuto := false          //紀錄這次有沒有被改變狀態
+	choeseBossSeq := 0          //這次選擇的關卡
 	for {
 		//如果config有變動 需要重新回到主頁
 		settingConfig, _ := LoadSettingConfig()
@@ -79,12 +80,14 @@ func main() {
 
 				if now_type == "freeBoss" {
 					haveOneImgsLeft(10, 0.05, true, getSystemImg("joinBoss.png"))
+					tmpFreeRoom = "freeRoom.png"
 					imgBoss = "isNotFound"
 					imgDifficulty = "isNotFound"
 					yDifficulty = 0
 					yBoss = 0
 				} else if now_type == "freeActivity" {
 					haveOneImgsLeft(10, 0.05, true, getSystemImg("joinActivity.png"))
+					tmpFreeRoom = "toghterGo.png"
 					imgBoss = "remaining.png"
 					imgDifficulty = "isNotFound"
 					yDifficulty = 310
@@ -118,9 +121,9 @@ func main() {
 				leftMouseClick(x, y)
 			},
 			func(x, y int) {
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("toghterGo.png")}, func() {
-					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("toghterGo.png")}, func(x, y int) {
-						leftMouseClick(x, y)
+				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg(tmpFreeRoom)}, func() {
+					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg(tmpFreeRoom)}, func(x, y int) {
+						leftMouseClick(x-100, y)
 					})
 				}, func() {
 					leftMouseClick(x, y)
