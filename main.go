@@ -193,7 +193,7 @@ func main() {
 			},
 			func(x, y int) {
 				//如果是招募中 就看招募方式  以滿就直接開始
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png"), getSystemImg("recruiting.png")}, func() {
+				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyAOK.png"), getSystemImg("recruiting.png")}, func() {
 					if settingConfig.CMode == 1 {
 						//直接開始
 						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
