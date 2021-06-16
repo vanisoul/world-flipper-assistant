@@ -36,7 +36,15 @@ func main() {
 			tmpCMode = settingConfig.CMode
 			tmpCNumber = settingConfig.CNumber
 			tmpPermanentPhysicalExertion = settingConfig.PermanentPhysicalExertion
-			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("ready.png"), getSystemImg("readyOK.png"), getSystemImg("goGame.png"), getSystemImg("stop.png")},
+			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("ready.png"), getSystemImg("readyOK.png"), getSystemImg("readyA.png"), getSystemImg("readyAOK.png"), getSystemImg("goGame.png"), getSystemImg("stop.png")},
+				func(x, y int) {
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("return.png"))
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("exitGreen.png"))
+				},
+				func(x, y int) {
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("return.png"))
+					haveOneImgsLeft(3, 0.05, true, getSystemImg("exitGreen.png"))
+				},
 				func(x, y int) {
 					haveOneImgsLeft(3, 0.05, true, getSystemImg("return.png"))
 					haveOneImgsLeft(3, 0.05, true, getSystemImg("exitGreen.png"))
@@ -62,7 +70,7 @@ func main() {
 		}
 
 		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png")},
+		haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("readyA.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("readyAOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png")},
 			func(x, y int) {
 				leftMouseClick(x, y)
 			},
@@ -138,7 +146,12 @@ func main() {
 				})
 			},
 			func(x, y int) {
-				leftMouseClick(x, y)
+				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("fullOfEnergy.png")}, func() {
+					tmpAuto = "repalay"
+					choseAuto = true
+				}, func() {
+					leftMouseClick(x, y)
+				})
 			},
 			func(x, y int) {
 				leftMouseClick(x, y)
@@ -151,6 +164,32 @@ func main() {
 			},
 			func(x, y int) {
 				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				//如果是招募中 就看招募方式  以滿就直接開始
+				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png"), getSystemImg("recruiting.png")}, func() {
+					if settingConfig.CMode == 1 {
+						//直接開始
+						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
+							leftMouseClick(x, y)
+							leftMouseClick(x+80, y)
+						})
+					} else if settingConfig.CMode == 2 {
+						//開放等人滿開始
+						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
+							leftMouseClick(x, y)
+							leftMouseClick(x+190, y)
+						})
+					}
+				}, func() {
+					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
+						leftMouseClick(x, y)
+						leftMouseClick(x+80, y)
+					})
+				})
 			},
 			func(x, y int) {
 				//如果是招募中 就看招募方式  以滿就直接開始
