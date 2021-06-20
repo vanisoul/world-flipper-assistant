@@ -139,16 +139,24 @@ func main() {
 			},
 			func(x, y int) {
 				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("fullOfEnergy.png")}, func() {
-					tmpAuto = "repalay"
-					choseAuto = true
+					if settingConfig.PermanentPhysicalExertion {
+						tmpAuto = "repalay"
+						choseAuto = true
+					} else {
+						leftMouseClick(x, y)
+					}
 				}, func() {
 					leftMouseClick(x, y)
 				})
 			},
 			func(x, y int) {
 				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("fullOfEnergy.png")}, func() {
-					tmpAuto = "repalay"
-					choseAuto = true
+					if settingConfig.PermanentPhysicalExertion {
+						tmpAuto = "repalay"
+						choseAuto = true
+					} else {
+						leftMouseClick(x, y)
+					}
 				}, func() {
 					leftMouseClick(x, y)
 				})
