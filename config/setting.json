@@ -1,8 +1,8 @@
 {
-    "type": "freeBoss",
+    "type": "freeActivity",
     "cMode": 1,
     "cNumber": 1,
-    "rNumber": 3,
+    "rNumber": 4,
     "rDifficulty":7,
     "permanentPhysicalExertion":true,
     "staminaRecoveryTime":1000
