@@ -4,8 +4,8 @@ import "fmt"
 
 var infox int = 0
 var infoy int = 0
-var infow int = 2000
-var infoh int = 2000
+var infow int = 20000
+var infoh int = 20000
 
 //手機板 900*1600
 
