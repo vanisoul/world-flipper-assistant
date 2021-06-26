@@ -2,8 +2,8 @@
     "type": "freeBoss",
     "cMode": 1,
     "cNumber": 1,
-    "rNumber": 3,
-    "rDifficulty":5,
+    "rNumber": 2,
+    "rDifficulty":1,
     "permanentPhysicalExertion":true,
     "staminaRecoveryTime":1000
 }
