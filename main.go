@@ -62,8 +62,6 @@ func main() {
 					haveOneImgsLeft(5, 0.01, false, getSystemImg("exitYes.png"))
 				})
 			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
-			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
-			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
 			//如果不等於重復關卡 就可以設定目前狀態 因為重復關卡可能是因為體力滿了而執行的AUTO
 			if tmpAuto != "repalay" {
 				tmpAuto = settingConfig.Type
@@ -72,7 +70,7 @@ func main() {
 		}
 
 		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.03, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("readyA.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("readyAOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png"), getSystemImg("SKIP.png"), getSystemImg("dayGift2.png"), getSystemImg("closeRols.png"), getSystemImg("gameStop.png"), getSystemImg("goGame2.png"), getSystemImg("reOK.png"), getSystemImg("errorClose.png"), getSystemImg("OKupdateVertion.png"), getSystemImg("playUpdate.png"), getSystemImg("startGamePlay.png"), getSystemImg("updateVertion.png"), getSystemImg("OKupdateVertion2.png")},
+		haveOneImgsExecFunc(1, 0.03, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("readyA.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("readyAOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png"), getSystemImg("SKIP.png"), getSystemImg("dayGift2.png"), getSystemImg("closeRols.png"), getSystemImg("gameStop.png"), getSystemImg("goGame2.png"), getSystemImg("reOK.png"), getSystemImg("errorClose.png"), getSystemImg("OKupdateVertion.png"), getSystemImg("playUpdate.png"), getSystemImg("startGamePlay.png"), getSystemImg("updateVertion.png"), getSystemImg("OKupdateVertion2.png"), getSystemImg("maintag1.png"), getSystemImg("maintag2.png")},
 			func(x, y int) {
 				leftMouseClick(x, y)
 			},
@@ -297,6 +295,12 @@ func main() {
 			},
 			func(x, y int) {
 				leftMouseClick(x, y)
+			},
+			func(x, y int) {
+				haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
+			},
+			func(x, y int) {
+				haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
 			})
 	}
 }
