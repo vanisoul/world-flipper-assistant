@@ -62,6 +62,7 @@ func main() {
 					haveOneImgsLeft(5, 0.01, false, getSystemImg("exitYes.png"))
 				})
 			haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
+			robotgo.Sleep(8)
 			//如果不等於重復關卡 就可以設定目前狀態 因為重復關卡可能是因為體力滿了而執行的AUTO
 			if tmpAuto != "repalay" {
 				tmpAuto = settingConfig.Type
@@ -298,9 +299,11 @@ func main() {
 			},
 			func(x, y int) {
 				haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
+				robotgo.Sleep(8)
 			},
 			func(x, y int) {
 				haveOneImgsLeft(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
+				robotgo.Sleep(8)
 			})
 	}
 }
@@ -310,6 +313,7 @@ func choeseBoss(seq int) {
 	y := y_tmp + yBoss + seq*110
 	if seq < 6 {
 		leftMouseClick(x, y)
+		robotgo.Sleep(3)
 	} else {
 		ys := y_tmp + 310 + 4*110
 		ye := y_tmp + 310 + 1*110
@@ -329,6 +333,7 @@ func choeseDifficulty(seq int) {
 	y := y_tmp + yDifficulty + seq*110
 	if seq < 6 {
 		leftMouseClick(x, y)
+		robotgo.Sleep(3)
 	} else {
 		ys := y_tmp + 310 + 2*110
 		ye := y_tmp + 310 + 1*110
