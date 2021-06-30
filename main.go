@@ -10,7 +10,7 @@ var imgBoss = "remaining.pngOrstroke.png"
 var imgDifficulty = "updateList.pngOritemExchange.png"
 
 func main() {
-
+	adbinit(1)
 	//初始化設定 未來要判斷視窗位置
 	infoScreen(-40, -40, 600, 1050)
 	//初始化ID

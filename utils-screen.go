@@ -2,13 +2,8 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"os"
-	"path"
-	"time"
 
 	"github.com/go-vgo/robotgo"
-	"github.com/labstack/gommon/log"
 )
 
 //一直執行func 當遇到圖片其一
@@ -73,23 +68,12 @@ func haveAllImgsExecFunc(frequency int, matchNumber float64, rigorous bool, imgF
 
 // 儲存定義的的視窗 ,
 // paths 儲存至 log/${paths[0]}/${paths[1]}.....
-func savescreen(paths ...string) int {
+func savescreen(name string) {
 
-	r := rand.New(rand.NewSource(time.Now().UnixNano())).Int()
-	imgName := fmt.Sprintf("log/%d.png", r)
+	imgName := fmt.Sprintf("log/%s", name)
 
-	if len(paths) > 0 {
-		pathstr := path.Join(paths...)
-		imgName = fmt.Sprintf("log/%s/%d.png", pathstr, r)
-		err := os.MkdirAll(path.Dir(imgName), os.ModePerm)
-		if err != nil {
-			log.Error(err)
-		}
-	}
-
-	bitmap := robotgo.CaptureScreen(infox, infoy, infow, infoh)
+	AdbShellScreencapPullRm()
+	bitmap := robotgo.OpenBitmap("screen.png")
 	defer robotgo.FreeBitmap(bitmap)
 	robotgo.SaveBitmap(bitmap, imgName)
-
-	return r
 }
