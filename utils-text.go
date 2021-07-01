@@ -3,12 +3,11 @@ package main
 import "github.com/go-vgo/robotgo"
 
 func textLocation(x int, y int, text string) (succ bool) {
-	robotgo.MoveMouse(x, y)
-	robotgo.MouseClick()
+	AdbShellInputTap(x, y)
 	robotgo.Sleep(1)
-	robotgo.MouseClick()
+	AdbShellInputTap(x, y)
 	robotgo.Sleep(1)
-	robotgo.TypeStr(text, 10)
+	AdbShellInputText(text)
 	succ = true
 	return
 

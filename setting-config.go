@@ -19,6 +19,7 @@ func LoadSettingConfig() (config SettingConfig, err error) {
 }
 
 type SettingConfig struct {
+	Nox                       int    `mapstructure:"nox"`
 	Type                      string `mapstructure:"type"`
 	CMode                     int    `mapstructure:"cMode"`
 	CNumber                   int    `mapstructure:"cNumber"`

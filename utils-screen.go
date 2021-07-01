@@ -62,12 +62,12 @@ func haveOneImgsExecFunc(frequency int, matchNumber float64, rigorous bool, imgF
 //rigorous : 是否需要持續1秒鐘以上圖片存在才算匹配成功 : 秒數可由rigorousSec修改,
 //imgFullPaths : 傳入圖片相對全路徑 (多張),
 //funcs : 可能被執行的方法
-func haveAllImgsExecFunc(frequency int, matchNumber float64, rigorous bool, imgFullPaths []string, funcY func(), funcN func()) {
+func haveAllImgsExecFunc(frequency int, matchNumber float64, rigorous bool, imgFullPaths []string, Yfunc func(), Nfunc func()) {
 	findSucc := findAllImages(frequency, matchNumber, rigorous, imgFullPaths...)
 	if findSucc {
-		funcY()
+		Yfunc()
 	} else {
-		funcN()
+		Nfunc()
 	}
 }
 
@@ -87,7 +87,8 @@ func savescreen(paths ...string) int {
 		}
 	}
 
-	bitmap := robotgo.CaptureScreen(infox, infoy, infow, infoh)
+	AdbShellScreencapPullRm()
+	bitmap := robotgo.OpenBitmap("screen.png")
 	defer robotgo.FreeBitmap(bitmap)
 	robotgo.SaveBitmap(bitmap, imgName)
 

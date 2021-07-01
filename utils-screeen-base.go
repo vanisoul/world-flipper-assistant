@@ -24,14 +24,15 @@ func findOneImages(frequency int, matchNumber float64, rigorous bool, imgFullPat
 	y = -1
 	tmp_frequency := 0
 	for tmp_frequency < frequency {
-		robotgo.MoveMouse(0, 0)
-		new_bitmap := robotgo.CaptureScreen(infox, infoy, infow, infoh)
+		AdbShellScreencapPullRm()
+		new_bitmap := robotgo.OpenBitmap("screen.png")
 		defer robotgo.FreeBitmap(new_bitmap)
 
 		rigorous_bitmap := robotgo.CaptureScreen(0, 0, 0, 0)
 		if rigorous {
 			robotgo.Sleep(rigorousSec)
-			rigorous_bitmap = robotgo.CaptureScreen(infox, infoy, infow, infoh)
+			AdbShellScreencapPullRm()
+			rigorous_bitmap = robotgo.OpenBitmap("screen.png")
 		}
 		defer robotgo.FreeBitmap(rigorous_bitmap)
 
@@ -57,8 +58,8 @@ func findOneImages(frequency int, matchNumber float64, rigorous bool, imgFullPat
 			}
 			succ = true
 			index = idx
-			x = fx + (imgw / 2) + infox
-			y = fy + (imgh / 2) + infoy
+			x = fx + (imgw / 2)
+			y = fy + (imgh / 2)
 			log.Infof("findOneImages %s is found", imgFullPath)
 			setLog("findOneImages", "尋找圖片成功", fmt.Sprintf("img: %s, x:%d, y:%d", imgFullPath, x, y))
 			return
@@ -88,14 +89,15 @@ func findAllImages(frequency int, matchNumber float64, rigorous bool, imgFullPat
 	tmp_frequency := 0
 
 	for tmp_frequency < frequency {
-		robotgo.MoveMouse(0, 0)
-		new_bitmap := robotgo.CaptureScreen(infox, infoy, infow, infoh)
+		AdbShellScreencapPullRm()
+		new_bitmap := robotgo.OpenBitmap("screen.png")
 		defer robotgo.FreeBitmap(new_bitmap)
 
 		rigorous_bitmap := robotgo.CaptureScreen(0, 0, 0, 0)
 		if rigorous {
 			robotgo.Sleep(rigorousSec)
-			rigorous_bitmap = robotgo.CaptureScreen(infox, infoy, infow, infoh)
+			AdbShellScreencapPullRm()
+			rigorous_bitmap = robotgo.OpenBitmap("screen.png")
 		}
 		defer robotgo.FreeBitmap(rigorous_bitmap)
 
