@@ -61,7 +61,8 @@ func AdbShellInputSwipe(x1, y1, x2, y2 int) {
 	yy1 := strconv.Itoa(y1)
 	xx2 := strconv.Itoa(x2)
 	yy2 := strconv.Itoa(y2)
-	exec.Command("adb", "-s", adbHost, "shell", "input", "swipe", xx1, yy1, xx2, yy2).Run()
+	time := strconv.Itoa((y1 - y2) / 40 * 1000)
+	exec.Command("adb", "-s", adbHost, "shell", "input", "swipe", xx1, yy1, xx2, yy2, time).Run()
 }
 
 //類比長按 最後一個參數1000錶示1秒，可將下麵某個參數由500改為501，即允許坐標點有很小的變化。
