@@ -64,7 +64,7 @@ func main() {
 		}
 
 		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.03, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("goGame.png"), getSystemImg("rePlay.png")},
+		haveOneImgsExecFunc(1, 0.03, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("OK.png"), getSystemImg("YES.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("goGame.png"), getSystemImg("rePlay.png")},
 			func(x, y int) {
 				mouseClick(x, y)
 			},
@@ -112,6 +112,9 @@ func main() {
 			},
 			func(x, y int) {
 				choeseDifficulty(settingConfig.RDifficulty)
+			},
+			func(x, y int) {
+				mouseClick(x, y)
 			},
 			func(x, y int) {
 				mouseClick(x, y)
