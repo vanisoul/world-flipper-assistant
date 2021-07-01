@@ -64,11 +64,7 @@ func main() {
 		}
 
 		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.03, false, []string{getSystemImg("rooming.png"), getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("YES.png"), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("readyA.png"), getSystemImg("next1.png"), getSystemImg("next2.png"), getSystemImg("next3.png"), getSystemImg("next4.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("readyAOK.png"), getSystemImg("exitHalfway.png"), getSystemImg("errorOK.png"), getSystemImg("goGame.png"), getSystemImg("gmaeOver.png"), getSystemImg("gmaeOverOK.png"), getSystemImg("LvUp.png"), getSystemImg("rePlay.png"), getSystemImg("lackOfEnergy.png"), getSystemImg("fiveStar.png"), getSystemImg("fourStar.png"), getSystemImg("threeStar.png"), getSystemImg("NEW.png"), getSystemImg("SKIP.png"), getSystemImg("dayGift2.png"), getSystemImg("closeRols.png"), getSystemImg("gameStop.png"), getSystemImg("goGame2.png"), getSystemImg("reOK.png"), getSystemImg("errorClose.png"), getSystemImg("OKupdateVertion.png"), getSystemImg("playUpdate.png"), getSystemImg("startGamePlay.png"), getSystemImg("updateVertion.png"), getSystemImg("OKupdateVertion2.png"), getSystemImg("maintag1.png"), getSystemImg("maintag2.png")},
-			func(x, y int) {
-				haveOneImgsClick(5, 0.03, false, getSystemImg("OK.png"))
-				haveOneImgsClick(5, 0.03, false, getSystemImg("updateList.png"))
-			},
+		haveOneImgsExecFunc(1, 0.03, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("OK.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("goGame.png")},
 			func(x, y int) {
 				mouseClick(x, y)
 			},
@@ -127,9 +123,6 @@ func main() {
 				mouseClick(x, y)
 			},
 			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
 				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg(tmpFreeRoom)}, func() {
 					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg(tmpFreeRoom)}, func(x, y int) {
 						mouseClick(x-100, y)
@@ -151,27 +144,6 @@ func main() {
 				})
 			},
 			func(x, y int) {
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("fullOfEnergy.png")}, func() {
-					if settingConfig.PermanentPhysicalExertion {
-						tmpAuto = "repalay"
-						choseAuto = true
-					} else {
-						mouseClick(x, y)
-					}
-				}, func() {
-					mouseClick(x, y)
-				})
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
 				mouseClick(x, y)
 			},
 			func(x, y int) {
@@ -185,38 +157,10 @@ func main() {
 						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
 							mouseClick(x, y)
 							mouseClick(x+140, y)
-							mouseClick(x, y)
-							mouseClick(x+140, y)
-							mouseClick(x, y)
-							mouseClick(x+140, y)
-							mouseClick(x, y)
-							mouseClick(x+140, y)
-							mouseClick(x, y)
-							mouseClick(x+140, y)
-							mouseClick(x, y)
-							mouseClick(x+140, y)
-							mouseClick(x, y)
-							mouseClick(x+140, y)
-							mouseClick(x, y)
-							mouseClick(x+140, y)
 						})
 					} else if settingConfig.CMode == 2 {
 						//開放等人滿開始
 						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-							mouseClick(x, y)
-							mouseClick(x+300, y)
-							mouseClick(x, y)
-							mouseClick(x+300, y)
-							mouseClick(x, y)
-							mouseClick(x+300, y)
-							mouseClick(x, y)
-							mouseClick(x+300, y)
-							mouseClick(x, y)
-							mouseClick(x+300, y)
-							mouseClick(x, y)
-							mouseClick(x+300, y)
-							mouseClick(x, y)
-							mouseClick(x+300, y)
 							mouseClick(x, y)
 							mouseClick(x+300, y)
 						})
@@ -225,127 +169,11 @@ func main() {
 					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
 						mouseClick(x, y)
 						mouseClick(x+140, y)
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-					})
-				})
-			},
-			func(x, y int) {
-				//如果是招募中 就看招募方式  以滿就直接開始
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyAOK.png"), getSystemImg("recruiting.png")}, func() {
-					if settingConfig.CMode == 1 {
-						//直接開始
-						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-							mouseClick(x, y)
-							mouseClick(x+80, y)
-						})
-					} else if settingConfig.CMode == 2 {
-						//開放等人滿開始
-						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-							mouseClick(x, y)
-							mouseClick(x+190, y)
-						})
-					}
-				}, func() {
-					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-						mouseClick(x, y)
-						mouseClick(x+80, y)
 					})
 				})
 			},
 			func(x, y int) {
 				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				haveOneImgsClick(5, 0.05, false, getSystemImg("cancel.png"))
-				tmpAuto = settingConfig.Type
-				choseAuto = true
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				haveOneImgsClick(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
-				robotgo.Sleep(8)
-			},
-			func(x, y int) {
-				haveOneImgsClick(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
-				robotgo.Sleep(8)
 			})
 	}
 }
