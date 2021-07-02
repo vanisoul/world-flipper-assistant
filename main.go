@@ -23,14 +23,13 @@ func main() {
 
 	tmpSettingConfig, _ := LoadSettingConfig()
 	tmpSettingConfig.Type = ""
-	adbinit(tmpSettingConfig.Nox)
 
 	for {
 		//如果config有變動 遊戲重開
 		settingConfig, _ = LoadSettingConfig()
 		if tmpSettingConfig != settingConfig {
 			tmpSettingConfig = settingConfig
-			adbinit(tmpSettingConfig.Nox)
+			adbinit(settingConfig.Nox)
 			status = 0
 		}
 
