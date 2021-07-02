@@ -76,6 +76,7 @@ func main() {
 			runActivityImgImg, runActivityImgFunc = addImgBoss(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addImgDifficulty(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addGoGame(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addGoGameMaze(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addGmaeOver(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addOK(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addNext1(runActivityImgImg, runActivityImgFunc)

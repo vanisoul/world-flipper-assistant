@@ -362,6 +362,10 @@ func addGoGame(strs []string, funcs []func(x int, y int)) (resStrs []string, res
 	resStrs, resFuncs = clickBase(strs, "goGame.png", funcs)
 	return
 }
+func addGoGameMaze(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	resStrs, resFuncs = clickBase(strs, "goGameMaze.png", funcs)
+	return
+}
 func addRePlay(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
 	resStrs, resFuncs = clickBase(strs, "rePlay.png", funcs)
 	return
