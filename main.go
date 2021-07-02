@@ -1,6 +1,8 @@
 package main
 
 import (
+	"strconv"
+
 	"github.com/go-vgo/robotgo"
 )
 
@@ -128,7 +130,7 @@ func main() {
 		}
 
 		if notthink > 500 {
-			savescreen("notthink")
+			savescreen("notthink", strconv.Itoa(status))
 			status = 0
 			notthink = 0
 		}
