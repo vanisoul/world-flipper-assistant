@@ -336,13 +336,13 @@ func addModeWait(strs []string, funcs []func(x int, y int)) (resStrs []string, r
 		haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("recruiting.png")}, func() {
 			//開放等人滿開始
 			findOneImgFuncStop(func() {
-				mouseClick(x, y)
-				mouseClick(x+300, y)
+				mouseClickNoTime(x, y)
+				mouseClickNoTime(x+300, y)
 			}, 1, 0.05, false, getSystemImg("recruitAll.png"), getSystemImg("OK.png"))
 		}, func() {
 			findOneImgFuncStop(func() {
-				mouseClick(x, y)
-				mouseClick(x+140, y)
+				mouseClickNoTime(x, y)
+				mouseClickNoTime(x+140, y)
 			}, 1, 0.05, false, getSystemImg("stop.png"), getSystemImg("OK.png"))
 		})
 	})
@@ -359,20 +359,20 @@ func addReadyOK(strs []string, funcs []func(x int, y int)) (resStrs []string, re
 			if settingConfig.CMode == 1 {
 				//直接開始
 				haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-					mouseClick(x, y)
-					mouseClick(x+140, y)
+					mouseClickNoTime(x, y)
+					mouseClickNoTime(x+140, y)
 				})
 			} else if settingConfig.CMode == 2 {
 				//開放等人滿開始
 				haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-					mouseClick(x, y)
-					mouseClick(x+300, y)
+					mouseClickNoTime(x, y)
+					mouseClickNoTime(x+300, y)
 				})
 			}
 		}, func() {
 			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-				mouseClick(x, y)
-				mouseClick(x+140, y)
+				mouseClickNoTime(x, y)
+				mouseClickNoTime(x+140, y)
 			})
 		})
 	})
