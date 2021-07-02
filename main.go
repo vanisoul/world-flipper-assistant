@@ -118,7 +118,7 @@ func main() {
 			} else if settingConfig.CMode == 2 {
 				runActivityFreeImg, runActivityFreeFunc = addModeWait(runActivityFreeImg, runActivityFreeFunc)
 			}
-
+			runActivityFreeImg, runActivityFreeFunc = addNoAuto(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addNext1(runActivityFreeImg, runActivityFreeFunc)
 
 			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)

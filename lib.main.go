@@ -299,6 +299,11 @@ func addNext1(strs []string, funcs []func(x int, y int)) (resStrs []string, resF
 	return
 }
 
+func addNoAuto(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	resStrs, resFuncs = clickBase(strs, "noAuto.png", funcs)
+	return
+}
+
 func addExitRoom(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
 	strs = append(strs, getSystemImg("exitRoom.png"))
 	funcs = append(funcs, func(x, y int) {
