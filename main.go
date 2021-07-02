@@ -91,36 +91,37 @@ func main() {
 			if settingConfig.PermanentPhysicalExertion {
 				runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
 			}
-			runActivityFreeImg, runActivityFreeFunc = addJoinActivity(runActivityFreeImg, runActivityFreeFunc)
+			if settingConfig.Type == "freeActivity" {
+				runActivityFreeImg, runActivityFreeFunc = addJoinActivity(runActivityFreeImg, runActivityFreeFunc)
+			} else if settingConfig.Type == "freeBoss" {
+				runActivityFreeImg, runActivityFreeFunc = addJoinBoss(runActivityFreeImg, runActivityFreeFunc)
+			}
 			runActivityFreeImg, runActivityFreeFunc = addImgBoss(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addImgDifficulty(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addJoinfreeRoom(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addYES(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addReady(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addReadyOK(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addNext1(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addExitRoom(runActivityFreeImg, runActivityFreeFunc)
 
 			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)
 		}
 
-		//boss 共鬥
-		if status == 7 {
+		//在房間內
+		if status == 66 {
 			runActivityFreeImg := []string{}
 			runActivityFreeFunc := []func(x int, y int){}
 			if settingConfig.PermanentPhysicalExertion {
 				runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
 			}
-			runActivityFreeImg, runActivityFreeFunc = addJoinBoss(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addImgBoss(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addImgDifficulty(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addJoinfreeRoom(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addYES(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addReady(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addReadyOK(runActivityFreeImg, runActivityFreeFunc)
-			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)
+
+			if settingConfig.CMode == 1 {
+				runActivityFreeImg, runActivityFreeFunc = addModeGo(runActivityFreeImg, runActivityFreeFunc)
+			} else if settingConfig.CMode == 2 {
+				runActivityFreeImg, runActivityFreeFunc = addModeWait(runActivityFreeImg, runActivityFreeFunc)
+			}
+
 			runActivityFreeImg, runActivityFreeFunc = addNext1(runActivityFreeImg, runActivityFreeFunc)
+
+			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addExitRoom(runActivityFreeImg, runActivityFreeFunc)
 
 			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)

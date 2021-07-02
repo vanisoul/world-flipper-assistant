@@ -115,8 +115,15 @@ func addImgDifficulty(strs []string, funcs []func(x int, y int)) (resStrs []stri
 }
 
 func addOK(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
-	resStrs, resFuncs = clickBase(strs, "OK.png", funcs)
+	strs = append(strs, getSystemImg("OK.png"))
+	funcs = append(funcs, func(x, y int) {
+		mouseClick(x, y)
+		status = 6
+	})
+	resStrs = strs
+	resFuncs = funcs
 	return
+
 }
 
 func addJoinActivity(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
@@ -161,8 +168,15 @@ func addJoinfreeRoom(strs []string, funcs []func(x int, y int)) (resStrs []strin
 }
 
 func addReady(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
-	resStrs, resFuncs = clickBase(strs, "ready.png", funcs)
+	strs = append(strs, getSystemImg("ready.png"))
+	funcs = append(funcs, func(x, y int) {
+		mouseClick(x, y)
+		status = 66
+	})
+	resStrs = strs
+	resFuncs = funcs
 	return
+
 }
 
 func addFullOfEnergy(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
@@ -194,7 +208,7 @@ func addNotFullOfEnergyMain(strs []string, funcs []func(x int, y int)) (resStrs 
 			yDifficulty = 0
 			yBoss = 0
 			yEvery = 0
-			status = 7
+			status = 6
 		} else if settingConfig.Type == "repalay" {
 			imgBoss = "remaining.png"
 			imgDifficulty = "gameProblem.png"
@@ -273,8 +287,45 @@ func addNext1(strs []string, funcs []func(x int, y int)) (resStrs []string, resF
 	resStrs, resFuncs = clickBase(strs, "next1.png", funcs)
 	return
 }
+
 func addExitRoom(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
-	resStrs, resFuncs = clickBase(strs, "exitRoom.png", funcs)
+	strs = append(strs, getSystemImg("exitRoom.png"))
+	funcs = append(funcs, func(x, y int) {
+		mouseClick(x, y)
+		status = 6
+	})
+	resStrs = strs
+	resFuncs = funcs
+	return
+
+}
+
+func addModeGo(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	strs = append(strs, getSystemImg("dialogue.png"))
+	funcs = append(funcs, func(x, y int) {
+		mouseClick(x, y)
+		mouseClick(x+140, y)
+	})
+	resStrs = strs
+	resFuncs = funcs
+	return
+}
+
+func addModeWait(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	strs = append(strs, getSystemImg("dialogue.png"))
+	funcs = append(funcs, func(x, y int) {
+		//如果是招募中 就看招募方式  以滿就直接開始
+		haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("recruiting.png")}, func() {
+			//開放等人滿開始
+			mouseClick(x, y)
+			mouseClick(x+300, y)
+		}, func() {
+			mouseClick(x, y)
+			mouseClick(x+140, y)
+		})
+	})
+	resStrs = strs
+	resFuncs = funcs
 	return
 }
 
