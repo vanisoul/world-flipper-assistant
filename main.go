@@ -9,181 +9,122 @@ var yBoss = 0
 var yEvery = 0
 var imgBoss = "remaining.pngOrstroke.png"
 var imgDifficulty = "updateList.pngOritemExchange.png"
+var tmpFreeRoom = "isNotFound" //判斷免費房間的標的圖片
+var tmpAuto = ""               //紀錄auto狀態 如果是auto模式才有用到
+var choeseBossSeq = 0          //這次選擇的關卡
+var settingConfig SettingConfig
+var status = 0   //0為重開 1為到首頁 2為確認已到首頁 3為bossfree 4為自動耗體
+var notthink = 0 //多少次迴圈沒動作 1000次沒動作 就關閉重啟
 
 func main() {
 
 	//初始化ID
 	infoID()
 
-	tmpFreeRoom := "isNotFound" //判斷免費房間的標的圖片
-	tmpAuto := ""               //紀錄auto狀態 如果是auto模式才有用到
-	choseAuto := false          //紀錄這次有沒有被改變狀態
-	choeseBossSeq := 0          //這次選擇的關卡
-
 	tmpSettingConfig, _ := LoadSettingConfig()
 	tmpSettingConfig.Type = ""
 	adbinit(tmpSettingConfig.Nox)
 
 	for {
-		//如果config有變動 需要重新回到主頁
-		settingConfig, _ := LoadSettingConfig()
-		if tmpSettingConfig != settingConfig || choseAuto {
+		//如果config有變動 遊戲重開
+		settingConfig, _ = LoadSettingConfig()
+		if tmpSettingConfig != settingConfig {
 			tmpSettingConfig = settingConfig
-			haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("ready.png"), getSystemImg("readyOK.png"), getSystemImg("readyA.png"), getSystemImg("readyAOK.png"), getSystemImg("goGame.png"), getSystemImg("stop.png")},
-				func(x, y int) {
-					haveOneImgsClick(3, 0.05, true, getSystemImg("return.png"))
-					haveOneImgsClick(3, 0.05, true, getSystemImg("exitGreen.png"))
-				},
-				func(x, y int) {
-					haveOneImgsClick(3, 0.05, true, getSystemImg("return.png"))
-					haveOneImgsClick(3, 0.05, true, getSystemImg("exitGreen.png"))
-				},
-				func(x, y int) {
-					haveOneImgsClick(3, 0.05, true, getSystemImg("return.png"))
-					haveOneImgsClick(3, 0.05, true, getSystemImg("exitGreen.png"))
-				},
-				func(x, y int) {
-					haveOneImgsClick(3, 0.05, true, getSystemImg("return.png"))
-					haveOneImgsClick(3, 0.05, true, getSystemImg("exitGreen.png"))
-				},
-				func(x, y int) {
-					haveOneImgsClick(3, 0.05, true, getSystemImg("return.png"))
-				},
-				func(x, y int) {
-					mouseClick(x, y)
-					haveOneImgsClick(5, 0.01, false, getSystemImg("exit.png"))
-					haveOneImgsClick(5, 0.01, false, getSystemImg("exitYes.png"))
-				})
-			haveOneImgsClick(20, 0.1, false, getSystemImg("main1.png"), getSystemImg("main2.png"), getSystemImg("main3.png"), getSystemImg("main4.png"), getSystemImg("main5.png"), getSystemImg("main6.png"), getSystemImg("main7.png"))
-			robotgo.Sleep(8)
-			//如果不等於重復關卡 就可以設定目前狀態 因為重復關卡可能是因為體力滿了而執行的AUTO
-			if tmpAuto != "repalay" {
-				tmpAuto = settingConfig.Type
-			}
-			choseAuto = false
+			status = 0
 		}
 
-		//開啟遊戲
-		haveOneImgsExecFunc(1, 0.03, false, []string{getSystemImg("gameLogo.png"), getSystemImg("joinMain.png"), getSystemImg("mainMission.png"), getSystemImg(imgBoss), getSystemImg(imgDifficulty), getSystemImg("OK.png"), getSystemImg("YES.png"), getSystemImg("dayGift.png"), getSystemImg("dayClose.png"), getSystemImg("updateList.png"), getSystemImg("ready.png"), getSystemImg("next1.png"), getSystemImg("exitRoom.png"), getSystemImg("readyOK.png"), getSystemImg("goGame.png"), getSystemImg("rePlay.png"), getSystemImg("networkerrorOK.png")},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
+		//重開遊戲
+		if status == 0 {
+			//關閉遊戲
+			closeApp()
+			robotgo.Sleep(2)
+			//啟動遊戲
+			openApp()
 
-				now_type := ""
-				if settingConfig.PermanentPhysicalExertion {
-					now_type = tmpAuto
-				} else {
-					now_type = settingConfig.Type
-				}
+			status = 1
+		}
 
-				if now_type == "freeBoss" {
-					haveOneImgsClick(10, 0.05, true, getSystemImg("joinBoss.png"))
-					tmpFreeRoom = "freeRoom.png"
-					imgBoss = "isNotFound"
-					imgDifficulty = "isNotFound"
-					yDifficulty = 0
-					yBoss = 0
-					yEvery = 0
-				} else if now_type == "freeActivity" {
-					haveOneImgsClick(10, 0.05, true, getSystemImg("joinActivity.png"))
-					tmpFreeRoom = "toghterGo.png"
-					imgBoss = "remaining.png"
-					imgDifficulty = "isNotFound"
-					yBoss = 310
-					yEvery = 178
-					yDifficulty = 460
-					choeseBossSeq = settingConfig.CNumber
-				} else if now_type == "repalay" {
-					haveOneImgsClick(10, 0.05, true, getSystemImg("joinActivity.png"))
-					imgBoss = "remaining.png"
-					imgDifficulty = "gameProblem.png"
-					yBoss = 310
-					yEvery = 178
-					yDifficulty = 310
-					choeseBossSeq = settingConfig.RNumber
-				}
-			},
-			func(x, y int) {
-				choeseBoss(choeseBossSeq)
-			},
-			func(x, y int) {
-				choeseDifficulty(settingConfig.RDifficulty)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg(tmpFreeRoom)}, func() {
-					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg(tmpFreeRoom)}, func(x, y int) {
-						mouseClick(x-100, y)
-					})
-				}, func() {
-					mouseClick(x, y)
-				})
-			},
-			func(x, y int) {
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("fullOfEnergy.png")}, func() {
-					if settingConfig.PermanentPhysicalExertion {
-						tmpAuto = "repalay"
-						choseAuto = true
-					} else {
-						mouseClick(x, y)
-					}
-				}, func() {
-					mouseClick(x, y)
-				})
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				//如果是招募中 就看招募方式  以滿就直接開始
-				haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("readyOK.png"), getSystemImg("recruiting.png")}, func() {
-					if settingConfig.CMode == 1 {
-						//直接開始
-						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-							mouseClick(x, y)
-							mouseClick(x+140, y)
-						})
-					} else if settingConfig.CMode == 2 {
-						//開放等人滿開始
-						haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-							mouseClick(x, y)
-							mouseClick(x+300, y)
-						})
-					}
-				}, func() {
-					haveOneImgsExecFunc(1, 0.05, false, []string{getSystemImg("dialogue.png")}, func(x, y int) {
-						mouseClick(x, y)
-						mouseClick(x+140, y)
-					})
-				})
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			},
-			func(x, y int) {
-				mouseClick(x, y)
-			})
+		// 到首頁
+		if status == 1 {
+			toMainImg := []string{}
+			toMainFunc := []func(x int, y int){}
+			toMainImg, toMainFunc = addJoinMain(toMainImg, toMainFunc)
+			toMainImg, toMainFunc = addExitHalfway(toMainImg, toMainFunc)
+			toMainImg, toMainFunc = addMainMissionMainOK(toMainImg, toMainFunc)
+			haveOneImgsExecFunc(1, 0.05, false, toMainImg, toMainFunc...)
+		}
+
+		//確認已到首頁
+		if status == 2 {
+			//判斷體力是否滿
+			dowhatImg := []string{}
+			dowhatFunc := []func(x int, y int){}
+			//如果體力滿就狀態5 消耗體力
+			dowhatImg, dowhatFunc = addFullOfEnergyMain(dowhatImg, dowhatFunc)
+
+			haveOneImgsExecFunc(1, 0.05, false, dowhatImg, dowhatFunc...)
+		}
+
+		//消耗體力
+		if status == 5 {
+			runActivityImgImg := []string{}
+			runActivityImgFunc := []func(x int, y int){}
+			runActivityImgImg, runActivityImgFunc = addJoinActivity(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addImgBoss(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addImgDifficulty(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addGoGame(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addGmaeOver(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addNext1(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addRePlay(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addLackOfEnergy(runActivityImgImg, runActivityImgFunc)
+			haveOneImgsExecFunc(1, 0.05, false, runActivityImgImg, runActivityImgFunc...)
+		}
+
+		//活動共鬥freeActivity
+		if status == 6 {
+			runActivityFreeImg := []string{}
+			runActivityFreeFunc := []func(x int, y int){}
+			runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
+
+			runActivityFreeImg, runActivityFreeFunc = addJoinActivity(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addImgBoss(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addImgDifficulty(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addJoinfreeRoom(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addYES(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addReady(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addReadyOK(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addNext1(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addExitRoom(runActivityFreeImg, runActivityFreeFunc)
+
+			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)
+		}
+
+		//boss 共鬥
+		if status == 7 {
+			runActivityFreeImg := []string{}
+			runActivityFreeFunc := []func(x int, y int){}
+			runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
+
+			runActivityFreeImg, runActivityFreeFunc = addJoinBoss(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addImgBoss(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addImgDifficulty(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addJoinfreeRoom(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addYES(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addReady(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addReadyOK(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addNext1(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addExitRoom(runActivityFreeImg, runActivityFreeFunc)
+
+			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)
+		}
+
+		if notthink > 1000 {
+			status = 0
+			notthink = 0
+		}
+		notthink++
 	}
 }
 

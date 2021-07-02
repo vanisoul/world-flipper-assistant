@@ -122,3 +122,11 @@ func AdbShellDumpsysActivityF() string {
 	fmt.Println(match)
 	return match
 }
+
+func openApp() {
+	exec.Command("adb", "-s", adbHost, "shell", "am", "start", "-n", "air.com.gamania.worldflipper/.AppEntry").Run()
+}
+
+func closeApp() {
+	exec.Command("adb", "-s", adbHost, "shell", "am", "force-stop", "air.com.gamania.worldflipper").Run()
+}

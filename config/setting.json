@@ -1,7 +1,7 @@
 {
     "nox": 1,
     "type": "freeBoss",
-    "cMode": 1,
+    "cMode": 2,
     "cNumber": 1,
     "rNumber": 2,
     "rDifficulty":1,
