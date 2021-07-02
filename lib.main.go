@@ -126,6 +126,11 @@ func addOK(strs []string, funcs []func(x int, y int)) (resStrs []string, resFunc
 
 }
 
+func addGameOverOK(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	resStrs, resFuncs = clickBase(strs, "GameOverOK.png", funcs)
+	return
+}
+
 func addmainOK(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
 	strs = append(strs, getSystemImg("OK.png"))
 	funcs = append(funcs, func(x, y int) {

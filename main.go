@@ -80,7 +80,7 @@ func main() {
 			runActivityImgImg, runActivityImgFunc = addGoGame(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addGoGameMaze(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addGmaeOver(runActivityImgImg, runActivityImgFunc)
-			runActivityImgImg, runActivityImgFunc = addOK(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addGameOverOK(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addNext1(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addRePlay(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addLackOfEnergy(runActivityImgImg, runActivityImgFunc)
