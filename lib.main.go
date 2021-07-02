@@ -126,6 +126,17 @@ func addOK(strs []string, funcs []func(x int, y int)) (resStrs []string, resFunc
 
 }
 
+func addmainOK(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	strs = append(strs, getSystemImg("OK.png"))
+	funcs = append(funcs, func(x, y int) {
+		mouseClick(x, y)
+	})
+	resStrs = strs
+	resFuncs = funcs
+	return
+
+}
+
 func addJoinActivity(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
 	resStrs, resFuncs = clickBase(strs, "joinActivity.png", funcs)
 	return

@@ -49,7 +49,7 @@ func main() {
 			toMainImg := []string{}
 			toMainFunc := []func(x int, y int){}
 			toMainImg, toMainFunc = addJoinMain(toMainImg, toMainFunc)
-			toMainImg, toMainFunc = addOK(toMainImg, toMainFunc)
+			toMainImg, toMainFunc = addmainOK(toMainImg, toMainFunc)
 			toMainImg, toMainFunc = addExitHalfway(toMainImg, toMainFunc)
 			toMainImg, toMainFunc = addMainMissionMainOK(toMainImg, toMainFunc)
 			haveOneImgsExecFunc(1, 0.05, false, toMainImg, toMainFunc...)
