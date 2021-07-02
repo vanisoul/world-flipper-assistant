@@ -30,6 +30,7 @@ func main() {
 		settingConfig, _ = LoadSettingConfig()
 		if tmpSettingConfig != settingConfig {
 			tmpSettingConfig = settingConfig
+			adbinit(tmpSettingConfig.Nox)
 			status = 0
 		}
 
