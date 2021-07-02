@@ -112,9 +112,6 @@ func main() {
 		if status == 66 {
 			runActivityFreeImg := []string{}
 			runActivityFreeFunc := []func(x int, y int){}
-			if settingConfig.PermanentPhysicalExertion {
-				runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
-			}
 
 			if settingConfig.CMode == 1 {
 				runActivityFreeImg, runActivityFreeFunc = addModeGo(runActivityFreeImg, runActivityFreeFunc)

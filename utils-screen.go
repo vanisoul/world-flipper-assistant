@@ -19,11 +19,11 @@ import (
 //imgFullPaths : 傳入圖片相對全路徑 (多張)
 func findOneImgFuncStop(funcs func(), frequency int, matchNumber float64, rigorous bool, imgFullPaths ...string) {
 	for {
-		funcs()
 		findSucc, _, _, _ := findOneImages(frequency, matchNumber, rigorous, imgFullPaths...)
 		if findSucc {
 			return
 		}
+		funcs()
 	}
 }
 
@@ -35,11 +35,11 @@ func findOneImgFuncStop(funcs func(), frequency int, matchNumber float64, rigoro
 //imgFullPaths : 傳入圖片相對全路徑 (多張)
 func findAllImgFuncStop(funcs func(), frequency int, matchNumber float64, rigorous bool, imgFullPaths ...string) {
 	for {
-		funcs()
 		findSucc := findAllImages(frequency, matchNumber, rigorous, imgFullPaths...)
 		if findSucc {
 			return
 		}
+		funcs()
 	}
 }
 
