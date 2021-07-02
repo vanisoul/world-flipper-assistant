@@ -127,7 +127,8 @@ func main() {
 			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)
 		}
 
-		if notthink > 1000 {
+		if notthink > 500 {
+			savescreen("notthink")
 			status = 0
 			notthink = 0
 		}
