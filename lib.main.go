@@ -175,6 +175,49 @@ func addFullOfEnergy(strs []string, funcs []func(x int, y int)) (resStrs []strin
 	return
 }
 
+func addNotFullOfEnergyMain(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	strs = append(strs, getSystemImg("mainMission.png"))
+	funcs = append(funcs, func(x, y int) {
+		if settingConfig.Type == "freeActivity" {
+			tmpFreeRoom = "toghterGo.png"
+			imgBoss = "remaining.png"
+			imgDifficulty = "isNotFound"
+			yBoss = 310
+			yEvery = 178
+			yDifficulty = 460
+			choeseBossSeq = settingConfig.CNumber
+			status = 6
+		} else if settingConfig.Type == "freeBoss" {
+			tmpFreeRoom = "freeRoom.png"
+			imgBoss = "isNotFound"
+			imgDifficulty = "isNotFound"
+			yDifficulty = 0
+			yBoss = 0
+			yEvery = 0
+			status = 7
+		} else if settingConfig.Type == "repalay" {
+			imgBoss = "remaining.png"
+			imgDifficulty = "gameProblem.png"
+			yBoss = 310
+			yEvery = 178
+			yDifficulty = 310
+			choeseBossSeq = settingConfig.RNumber
+			status = 5
+		} else {
+			imgBoss = "isNotFound"
+			imgDifficulty = "isNotFound"
+			yBoss = -1
+			yEvery = -1
+			yDifficulty = -1
+			choeseBossSeq = -1
+			status = 0
+		}
+	})
+	resStrs = strs
+	resFuncs = funcs
+	return
+}
+
 func addFullOfEnergyMain(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
 	strs = append(strs, getSystemImg("fullOfEnergy.png"))
 	funcs = append(funcs, func(x, y int) {

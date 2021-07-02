@@ -60,8 +60,11 @@ func main() {
 			dowhatImg := []string{}
 			dowhatFunc := []func(x int, y int){}
 			//如果體力滿就狀態5 消耗體力
-			dowhatImg, dowhatFunc = addFullOfEnergyMain(dowhatImg, dowhatFunc)
-
+			if settingConfig.PermanentPhysicalExertion {
+				dowhatImg, dowhatFunc = addFullOfEnergyMain(dowhatImg, dowhatFunc)
+			} else {
+				dowhatImg, dowhatFunc = addNotFullOfEnergyMain(dowhatImg, dowhatFunc)
+			}
 			haveOneImgsExecFunc(1, 0.05, false, dowhatImg, dowhatFunc...)
 		}
 
@@ -85,8 +88,9 @@ func main() {
 		if status == 6 {
 			runActivityFreeImg := []string{}
 			runActivityFreeFunc := []func(x int, y int){}
-			runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
-
+			if settingConfig.PermanentPhysicalExertion {
+				runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
+			}
 			runActivityFreeImg, runActivityFreeFunc = addJoinActivity(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addImgBoss(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addImgDifficulty(runActivityFreeImg, runActivityFreeFunc)
@@ -105,8 +109,9 @@ func main() {
 		if status == 7 {
 			runActivityFreeImg := []string{}
 			runActivityFreeFunc := []func(x int, y int){}
-			runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
-
+			if settingConfig.PermanentPhysicalExertion {
+				runActivityFreeImg, runActivityFreeFunc = addFullOfEnergy(runActivityFreeImg, runActivityFreeFunc)
+			}
 			runActivityFreeImg, runActivityFreeFunc = addJoinBoss(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addImgBoss(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addImgDifficulty(runActivityFreeImg, runActivityFreeFunc)
