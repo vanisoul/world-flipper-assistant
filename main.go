@@ -62,9 +62,9 @@ func main() {
 			//如果體力滿就狀態5 消耗體力
 			if settingConfig.PermanentPhysicalExertion {
 				dowhatImg, dowhatFunc = addFullOfEnergyMain(dowhatImg, dowhatFunc)
-			} else {
-				dowhatImg, dowhatFunc = addNotFullOfEnergyMain(dowhatImg, dowhatFunc)
 			}
+			dowhatImg, dowhatFunc = addNotFullOfEnergyMain(dowhatImg, dowhatFunc)
+
 			haveOneImgsExecFunc(1, 0.05, false, dowhatImg, dowhatFunc...)
 		}
 
