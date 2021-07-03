@@ -130,7 +130,7 @@ func main() {
 			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)
 		}
 
-		if notthink > 500 {
+		if notthink > 250 {
 			status = 0
 			notthink = 0
 		}
