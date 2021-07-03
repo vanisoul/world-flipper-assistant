@@ -1,8 +1,6 @@
 package main
 
 import (
-	"strconv"
-
 	"github.com/go-vgo/robotgo"
 )
 
@@ -84,6 +82,7 @@ func main() {
 			runActivityImgImg, runActivityImgFunc = addGmaeOver(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addGameOverOK(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addNext1(runActivityImgImg, runActivityImgFunc)
+			runActivityImgImg, runActivityImgFunc = addLvUP(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addRePlay(runActivityImgImg, runActivityImgFunc)
 			runActivityImgImg, runActivityImgFunc = addLackOfEnergy(runActivityImgImg, runActivityImgFunc)
 			haveOneImgsExecFunc(1, 0.05, false, runActivityImgImg, runActivityImgFunc...)
@@ -124,13 +123,14 @@ func main() {
 			runActivityFreeImg, runActivityFreeFunc = addNext1(runActivityFreeImg, runActivityFreeFunc)
 
 			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addFourStar(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addLvUP(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addExitRoom(runActivityFreeImg, runActivityFreeFunc)
 
 			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)
 		}
 
 		if notthink > 500 {
-			savescreen("notthink", strconv.Itoa(status))
 			status = 0
 			notthink = 0
 		}

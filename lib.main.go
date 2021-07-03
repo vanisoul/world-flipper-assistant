@@ -303,6 +303,14 @@ func addNext1(strs []string, funcs []func(x int, y int)) (resStrs []string, resF
 	resStrs, resFuncs = clickBase(strs, "next1.png", funcs)
 	return
 }
+func addFourStar(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	resStrs, resFuncs = clickBase(strs, "fourStar.png", funcs)
+	return
+}
+func addLvUP(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
+	resStrs, resFuncs = clickBase(strs, "LvUP.png", funcs)
+	return
+}
 
 func addNoAuto(strs []string, funcs []func(x int, y int)) (resStrs []string, resFuncs []func(x int, y int)) {
 	resStrs, resFuncs = clickBase(strs, "noAuto.png", funcs)
