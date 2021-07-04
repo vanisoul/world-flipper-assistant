@@ -25,7 +25,7 @@ type SettingConfig struct {
 	CNumber                   int    `mapstructure:"cNumber"`
 	RNumber                   int    `mapstructure:"rNumber"`
 	RDifficulty               int    `mapstructure:"rDifficulty"`
-	StaminaRecoveryTime       int    `mapstructure:"staminaRecoveryTime"`
+	Notthink                  int    `mapstructure:"notthink"`
 	PermanentPhysicalExertion bool   `mapstructure:"permanentPhysicalExertion"`
 }
 

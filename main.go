@@ -132,7 +132,7 @@ func main() {
 			haveOneImgsExecFunc(1, 0.05, false, runActivityFreeImg, runActivityFreeFunc...)
 		}
 
-		if notthink > 250 {
+		if notthink > settingConfig.Notthink {
 			savescreen("notthink", strconv.Itoa(status))
 			status = 0
 			notthink = 0

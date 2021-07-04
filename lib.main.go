@@ -348,10 +348,10 @@ func addModeWait(strs []string, funcs []func(x int, y int)) (resStrs []string, r
 		//如果是招募中 就看招募方式  以滿就直接開始
 		haveAllImgsExecFunc(1, 0.05, false, []string{getSystemImg("recruiting.png")}, func() {
 			//開放等人滿開始
-			findOneImgFuncStop(func() {
+			findOneImgFuncLoop(func() {
 				mouseClickNoTime(x, y)
 				mouseClickNoTime(x+300, y)
-			}, 1, 0.05, false, getSystemImg("recruitAll.png"), getSystemImg("OK.png"))
+			}, 1, 0.05, false, getSystemImg("recruiting.png"))
 		}, func() {
 			findOneImgFuncStop(func() {
 				mouseClickNoTime(x, y)

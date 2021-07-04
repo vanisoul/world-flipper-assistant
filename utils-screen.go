@@ -27,6 +27,16 @@ func findOneImgFuncStop(funcs func(), frequency int, matchNumber float64, rigoro
 	}
 }
 
+func findOneImgFuncLoop(funcs func(), frequency int, matchNumber float64, rigorous bool, imgFullPaths ...string) {
+	for {
+		findSucc, _, _, _ := findOneImages(frequency, matchNumber, rigorous, imgFullPaths...)
+		if findSucc {
+			funcs()
+		}
+		return
+	}
+}
+
 //一直執行func 當遇到圖片全部
 //funcs : 被執行的方法,
 //frequency : 要搜尋幾次,
