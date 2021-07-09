@@ -12,7 +12,6 @@ var yEvery = 0
 var imgBoss = "remaining.pngOrstroke.png"
 var imgDifficulty = "updateList.pngOritemExchange.png"
 var tmpFreeRoom = "isNotFound" //判斷免費房間的標的圖片
-var tmpAuto = ""               //紀錄auto狀態 如果是auto模式才有用到
 var choeseBossSeq = 0          //這次選擇的關卡
 var settingConfig SettingConfig
 var status = 0   //0為重開 1為到首頁 2為確認已到首頁 3為bossfree 4為自動耗體
@@ -53,6 +52,7 @@ func main() {
 			toMainImg, toMainFunc = addJoinMain(toMainImg, toMainFunc)
 			toMainImg, toMainFunc = addmainOK(toMainImg, toMainFunc)
 			toMainImg, toMainFunc = addExitHalfway(toMainImg, toMainFunc)
+			toMainImg, toMainFunc = addDownloadOK(toMainImg, toMainFunc)
 			toMainImg, toMainFunc = addMainMissionMainOK(toMainImg, toMainFunc)
 			haveOneImgsExecFunc(1, 0.05, false, toMainImg, toMainFunc...)
 		}
@@ -101,6 +101,7 @@ func main() {
 				runActivityFreeImg, runActivityFreeFunc = addJoinActivity(runActivityFreeImg, runActivityFreeFunc)
 			} else if settingConfig.Type == "freeBoss" {
 				runActivityFreeImg, runActivityFreeFunc = addJoinBoss(runActivityFreeImg, runActivityFreeFunc)
+				runActivityFreeImg, runActivityFreeFunc = addJoinBoss2(runActivityFreeImg, runActivityFreeFunc)
 			}
 			runActivityFreeImg, runActivityFreeFunc = addImgBoss(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addImgDifficulty(runActivityFreeImg, runActivityFreeFunc)
@@ -125,7 +126,9 @@ func main() {
 			runActivityFreeImg, runActivityFreeFunc = addNext1(runActivityFreeImg, runActivityFreeFunc)
 
 			runActivityFreeImg, runActivityFreeFunc = addOK(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addThreeStar(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addFourStar(runActivityFreeImg, runActivityFreeFunc)
+			runActivityFreeImg, runActivityFreeFunc = addFiveStar(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addLvUP(runActivityFreeImg, runActivityFreeFunc)
 			runActivityFreeImg, runActivityFreeFunc = addExitRoom(runActivityFreeImg, runActivityFreeFunc)
 
